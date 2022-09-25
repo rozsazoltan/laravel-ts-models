@@ -33,7 +33,9 @@ class ModelGenerator extends AbstractGenerator
     public function __construct()
     {
         // Enums aren't supported by DBAL, so map enum columns to string.
-        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+        foreach(config('typescript.connections') as $connection) {
+            DB::connection($connection)->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+        }
     }
 
     public function getDefinition(): ?string

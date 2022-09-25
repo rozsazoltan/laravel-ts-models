@@ -4,6 +4,10 @@ use Datarose\TypeScript\Generators\ModelGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 return [
+  'connections' => [
+    'mysql'
+  ],
+  
   'generators' => [
     Model::class => ModelGenerator::class,
   ],
