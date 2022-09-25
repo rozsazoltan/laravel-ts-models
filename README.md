@@ -1,33 +1,105 @@
-# Laravel TypeScript
+##### Datarose Production
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/based/laravel-typescript.svg?style=flat-square)](https://packagist.org/packages/based/laravel-typescript)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lepikhinb/laravel-typescript/run-tests?label=tests)](https://github.com/lepikhinb/laravel-typescript/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/based/laravel-typescript.svg?style=flat-square)](https://packagist.org/packages/based/laravel-typescript)
+## laravel-ts-models
 
-The package lets you generate TypeScript interfaces from your Laravel models.
+#### Information
 
-## Introduction
-Say you have a model which has several properties (database columns) and multiple relations.
-```php
-class Product extends Model
-{
-    public function category(): BelongsTo
+[![Go to Github profile](https://img.shields.io/static/v1?label=datarose&message=production&color=2ea44f&logo=github)](https://github.com/rozsazoltan)
+[![@datarose/laravel-ts-models - v1.x](https://img.shields.io/static/v1?label=@datarose/laravel-ts-models&message=v1.x&color=e31d65)](https://github.com/rozsazoltan/laravel-ts-models/blob/dev-master/README.md)
+[![MIT license](https://img.shields.io/static/v1?label=License&message=MIT&color=2ea44f)](https://github.com/rozsazoltan/laravel-ts-models/blob/dev-master/LICENSE.md)
+[![Views](https://komarev.com/ghpvc/?username=rozsazoltan-laravel-ts-models&label=Views)](https://github.com/rozsazoltan/laravel-ts-models/blob/dev-master/LICENSE.md)
+
+This package upgraded version of [original laravel-ts-models](https://github.com/lepikhinb/laravel-typescript/tree/v0.0.3) (v0.0.3) created by [lepikhinb](https://github.com/lepikhinb).
+
+<br><br>
+
+## Documentation
+
+<details>
+  <summary>Documentation links</summary>
+
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [The Basics](#the-basics)
+  - [Supported](#supported)
+  - [Appendix](#appendix)
+    - [License](#license)
+    - [Special Thanks](#special-thanks)
+</details>
+
+>**Note:** Documentation links will working after open to Documentation content.
+
+<details>
+  <summary>Documentation content</summary>
+
+  ### Getting Started
+
+  #### Installation
+
+  Require:
+  - PHP 8.x or heigher
+  - Laravel 8.x or heigher
+
+  ```sh
+    # Install
+    composer install datarose/laravel-ts-models
+  ```
+
+  You can publish the config file with:
+  ```sh
+    php artisan vendor:published
+      --provider="Datarose\TypeScript\TypeScriptServiceProvider"
+      --tag="typescript-config"
+  ```
+
+  #### Usage
+
+  Generate TypeScript interfaces
+  ```sh
+    php artisan typescript:laravel-models
+  ```
+
+  Example usage with Vue 3
+  ```typescript
+    import { defineComponent, PropType } from "vue";
+
+    export default defineComponent({
+      props: {
+        product: {
+          type: Object as PropType<App.Models.Product>,
+          required: true,
+        },
+      },
+    }
+  ```
+
+  #### The Basics
+
+  The package lets you generate TypeScript interfaces from your Laravel models.
+
+  Say you have a model which has several properties (database columns) and multiple relations.
+
+  ```php
+    class Product extends Model
     {
+      public function category(): BelongsTo
+      {
         return $this->belongsTo(Category::class);
-    }
+      }
 
-    public function features(): HasMany
-    {
+      public function features(): HasMany
+      {
         return $this->hasMany(Feature::class);
+      }
     }
-}
-```
+  ```
 
 Laravel TypeScript will generate the following TypeScript interface:
 
-```typescript
-declare namespace App.Models {
-    export interface Product {
+  ```typescript
+    declare namespace App.Models {
+      export interface Product {
         id: number;
         category_id: number;
         name: string;
@@ -36,79 +108,37 @@ declare namespace App.Models {
         updated_at: string | null;
         category?: App.Models.Category | null;
         features?: Array<App.Models.Feature> | null;
+      }
+      ...
     }
-    ...
-}
-```
+  ```
 
-**Laravel TypeScript** supports:
-- [x] Database columns
-- [x] Model relations
-- [x] Model accessors
-- [ ] Casted attributes
+  <br><br>
 
-## Installation
+  ### Supported
 
-**Laravel 8 and PHP 8 are required.**
-You can install the package via composer:
+  - [x] Database columns
+  - [x] Model relations
+  - [x] Model accessors
+  - [ ] Casted attributes
 
-```bash
-composer require based/laravel-typescript
-```
+</details>
 
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Based\TypeScript\TypeScriptServiceProvider" --tag="typescript-config"
-```
+<br><br>
 
-This is the contents of the published config file:
+## Appendix
 
-```php
-return [
-    'generators' => [
-        Model::class => ModelGenerator::class,
-    ],
+### License
+#### @datarose/laravel-ts-models
+Open source under the [MIT License](https://github.com/rozsazoltan/laravel-ts-models/blob/dev-master/LICENSE.md).<br>
+© 2022 Rózsa Zoltán.
 
-    'output' => resource_path('js/models.d.ts'),
+#### lepikhinb/laravel-typescript (v0.0.3)
+This package upgraded version of [original laravel-ts-models](https://github.com/lepikhinb/laravel-typescript/tree/v0.0.3) (v0.0.3)<br>
+created by [lepikhinb](https://github.com/lepikhinb).<br>
+Open source under the [MIT License](https://github.com/lepikhinb/laravel-typescript/blob/v0.0.3/LICENSE.md).<br>
+© 2014–2018 Julian Lloyd.
 
-    // load namespaces from composer's `dev-autoload`
-    'autoloadDev' => false,
-];
+### Special Thanks
 
-```
-
-## Usage
-
-Generate TypeScript interfaces.
-```bash
-php artisan typescript:generate
-```
-
-Example usage with Vue 3:
-```typescript
-import { defineComponent, PropType } from "vue";
-
-export default defineComponent({
-    props: {
-        product: {
-            type: Object as PropType<App.Models.Product>,
-            required: true,
-        },
-    },
-}
-```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Credits
-
-- [Boris Lepikhin](https://github.com/lepikhinb)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+More thanks for original package [contributors](https://github.com/lepikhinb/laravel-typescript/graphs/contributors), and [lepikhinb](https://github.com/lepikhinb).

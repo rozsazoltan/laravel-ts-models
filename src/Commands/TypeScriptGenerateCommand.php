@@ -7,9 +7,9 @@ use Illuminate\Console\Command;
 
 class TypeScriptGenerateCommand extends Command
 {
-    public $signature = 'typescript:generate';
+    public $signature = 'typescript:laravel-models';
 
-    public $description = 'Generate TypeScript definitions from PHP classes';
+    public $description = 'Generate TypeScript definitions from Laravel Models';
 
     public function handle()
     {
