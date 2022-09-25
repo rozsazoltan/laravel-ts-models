@@ -1,38 +1,38 @@
 <?php
 
-namespace Based\TypeScript\Generators;
+namespace Datarose\TypeScript\Generators;
 
-use Based\TypeScript\Contracts\Generator;
+use Datarose\TypeScript\Contracts\Generator;
 use ReflectionClass;
 
 abstract class AbstractGenerator implements Generator
 {
-    protected ReflectionClass $reflection;
+  protected ReflectionClass $reflection;
 
-    public function generate(ReflectionClass $reflection): ?string
-    {
-        $this->reflection = $reflection;
-        $this->boot();
+  public function generate(ReflectionClass $reflection): ?string
+  {
+    $this->reflection = $reflection;
+    $this->boot();
 
-        if (empty(trim($definition = $this->getDefinition()))) {
-            return "    export interface {$this->tsClassName()} {}" . PHP_EOL;
-        }
-
-        return <<<TS
-            export interface {$this->tsClassName()} {
-                $definition
-            }
-
-        TS;
+    if (empty(trim($definition = $this->getDefinition()))) {
+      return "  export interface {$this->tsClassName()} {}" . PHP_EOL;
     }
 
-    protected function boot(): void
-    {
-        //
-    }
+    return <<<TS
+      export interface {$this->tsClassName()} {
+        $definition
+      }
 
-    protected function tsClassName(): string
-    {
-        return str_replace('\\', '.', $this->reflection->getShortName());
-    }
+    TS;
+  }
+
+  protected function boot(): void
+  {
+    //
+  }
+
+  protected function tsClassName(): string
+  {
+    return str_replace('\\', '.', $this->reflection->getShortName());
+  }
 }

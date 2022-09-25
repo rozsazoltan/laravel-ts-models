@@ -1,57 +1,54 @@
 {
-    "name": "based/laravel-typescript",
-    "description": "Transform Laravel models into TypeScript interfaces",
-    "keywords": [
-        "laravel",
-        "typescript"
-    ],
-    "homepage": "https://github.com/lepikhinb/laravel-typescript",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Boris Lepikhin",
-            "email": "boris@lepikhin.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^8.0",
-        "doctrine/dbal": "^3.1",
-        "illuminate/contracts": "^8.37|^9.0",
-        "spatie/laravel-package-tools": "^1.11.0"
-    },
-    "require-dev": {
-        "brianium/paratest": "^6.2",
-        "nunomaduro/collision": "^5.3|^6.1.0",
-        "nunomaduro/larastan": "^1.0.3",
-        "orchestra/testbench": "^6.15|^7.0.1",
-        "phpunit/phpunit": "^9.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "Based\\TypeScript\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Based\\TypeScript\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "stan": "vendor/bin/phpstan analyse",
-        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Based\\TypeScript\\TypeScriptServiceProvider"
-            ]
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "datarose/laravel-ts-models",
+  "description": "Generate TypeScript definitions from Laravel Models.",
+  "keywords": [
+    "laravel",
+    "typescript"
+  ],
+  "homepage": "https://github.com/rozsazoltan/laravel-ts-models",
+  "license": "MIT",
+  "authors": [{
+    "name": "Rózsa Zoltán",
+    "role": "Developer"
+  }],
+  "require": {
+    "php": "^8.0",
+    "doctrine/dbal": "^3.4.5",
+    "illuminate/contracts": "^8.37|^9.0",
+    "spatie/laravel-package-tools": "^1.11.0"
+  },
+  "require-dev": {
+    "brianium/paratest": "^6.2",
+    "nunomaduro/collision": "^5.3|^6.1.0",
+    "nunomaduro/larastan": "^1.0.3",
+    "orchestra/testbench": "^6.15|^7.0.1",
+    "phpunit/phpunit": "^9.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Based\\TypeScript\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Based\\TypeScript\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "stan": "vendor/bin/phpstan analyse",
+    "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Based\\TypeScript\\TypeScriptServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

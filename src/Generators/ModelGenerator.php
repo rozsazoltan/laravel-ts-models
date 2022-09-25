@@ -1,9 +1,9 @@
 <?php
 
-namespace Based\TypeScript\Generators;
+namespace Datarose\TypeScript\Generators;
 
-use Based\TypeScript\Definitions\TypeScriptProperty;
-use Based\TypeScript\Definitions\TypeScriptType;
+use Datarose\TypeScript\Definitions\TypeScriptProperty;
+use Datarose\TypeScript\Definitions\TypeScriptType;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Types\Types;
 use Illuminate\Database\Eloquent\Model;

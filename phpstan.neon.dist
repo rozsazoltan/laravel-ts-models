@@ -1,16 +1,16 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+  - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
 
-    paths:
-        - src
+  paths:
+    - src
 
-    # The level 8 is the highest level
-    level: 5
+  # The level 8 is the highest level
+  level: 5
 
-    ignoreErrors:
+  ignoreErrors:
 
-    excludePaths:
+  excludePaths:
 
-    checkMissingIterableValueType: false
+  checkMissingIterableValueType: false
